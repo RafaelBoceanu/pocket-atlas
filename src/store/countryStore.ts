@@ -19,9 +19,13 @@ type Country = {
 type Store = {
   selectedCountry: Country | null
   setSelectedCountry: (c: Country | null) => void
+  allCountries: Country[]
+  setAllCountries: (c: Country[]) => void
 }
 
 export const useCountryStore = create<Store>((set) => ({
   selectedCountry: null,
   setSelectedCountry: (c) => set({ selectedCountry: c }),
+  allCountries: [],
+  setAllCountries: (c) => set({ allCountries: c }),
 }))

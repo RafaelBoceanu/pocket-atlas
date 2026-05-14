@@ -5,7 +5,7 @@ import { useCountryStore } from '@/store/countryStore'
 import LeafletMap from './LeafletMap'
 
 export default function WorldMap() {
-    const { setSelectedCountry, selectedCountry } = useCountryStore()
+    const { setSelectedCountry, selectedCountry, setAllCountries } = useCountryStore()
     const [geoData, setGeoData] = useState<any>(null)
     const [countries, setCountries] = useState<any[]>([])
 
@@ -42,6 +42,7 @@ export default function WorldMap() {
             })
 
             setCountries(formatted)
+            setAllCountries(formatted)
         })
     }, [])
 

@@ -1,5 +1,6 @@
 import WorldMap from '@/components/map/WorldMap'
 import CountryPanel from '@/components/country/CountryPanel'
+import MicrostatePanel from '@/components/country/MicrostatePanel'
 
 export default function HomePage() {
   return (
@@ -8,6 +9,7 @@ export default function HomePage() {
         <WorldMap />
       </main>
       <CountryPanel />
+      <MicrostatePanel />
     </>
   )
 }
