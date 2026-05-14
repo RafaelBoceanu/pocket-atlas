@@ -4,7 +4,6 @@ import { useCountryStore } from '@/store/countryStore'
 
 export default function CountryPanel() {
   const country = useCountryStore((s) => s.selectedCountry)
-  const setSelectedCountry = useCountryStore((s) => s.setSelectedCountry)
 
   if (!country) return null
 
@@ -23,36 +22,11 @@ export default function CountryPanel() {
       fontFamily: 'system-ui, sans-serif',
     }}>
       {country.flag && (
-        <div style={{ position: 'relative' }}>
-          <img
-            src={country.flag}
-            alt={country.name}
-            style={{ width: '100%', height: '140px', objectFit: 'cover', display: 'block' }}
-          />
-          <button
-            onClick={() => setSelectedCountry(null)}
-            style={{
-              position: 'absolute',
-              top: '10px',
-              right: '10px',
-              background: 'rgba(255,255,255,0.9)',
-              border: 'none',
-              borderRadius: '50%',
-              width: '28px',
-              height: '28px',
-              cursor: 'pointer',
-              fontSize: '14px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#374151',
-              backdropFilter: 'blur(4px)',
-            }}
-            aria-label="Close panel"
-          >
-            ✕
-          </button>
-        </div>
+        <img
+          src={country.flag}
+          alt={country.name}
+          style={{ width: '100%', height: '140px', objectFit: 'cover', display: 'block' }}
+        />
       )}
 
       <div style={{ padding: '16px' }}>
