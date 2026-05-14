@@ -73,7 +73,11 @@ export default function WorldMap() {
                         color: '#cbd5e1',
                     })
                 },
-                click: () => {
+                click: (e: any) => {
+                    if (e.originalEvent) {
+                        e.originalEvent.stopPropagation()
+                        e.originalEvent._stopped = true
+                    }
                     const { selectedCountry, setSelectedCountry } = useCountryStore.getState()
 
                     if (selectedCountry?.iso3 === feature.id) {

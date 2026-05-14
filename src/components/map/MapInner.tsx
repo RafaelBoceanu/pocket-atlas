@@ -1,13 +1,24 @@
 'use client'
 
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
+import { MapContainer, TileLayer, GeoJSON, useMapEvents } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
+import { useCountryStore } from '@/store/countryStore'
 
 const WORLD_BOUNDS = L.latLngBounds(
   L.latLng(-90, -180),
   L.latLng(90, 180)
 )
+
+function MapClickHandler() {
+  const setSelectedCountry = useCountryStore((s) => s.setSelectedCountry)
+  useMapEvents({
+    click: () => {
+      setSelectedCountry(null)
+    },
+  })
+  return null
+}
 
 type Props = {
   geoData: any
@@ -21,7 +32,7 @@ export default function MapInner({ geoData, onEachCountry, selectedIso }: Props)
       center={[20, 0]}
       zoom={2}
       minZoom={2}
-      maxZoom={8}
+      maxZoom={18}
       maxBounds={WORLD_BOUNDS}
       maxBoundsViscosity={1.0}
       className="h-screen w-screen"
@@ -32,7 +43,7 @@ export default function MapInner({ geoData, onEachCountry, selectedIso }: Props)
         url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"
         noWrap={true}
       />
-
+      <MapClickHandler />
       <GeoJSON
         key={selectedIso ?? 'none'}
         data={geoData}
