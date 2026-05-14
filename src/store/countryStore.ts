@@ -2,11 +2,18 @@ import { create } from 'zustand'
 
 type Country = {
   name: string
+  nativeName?: string | null
   iso3: string
-  capital?: string
-  population?: number
-  region?: string
+  capital?: string | null
+  region?: string | null
+  subregion?: string | null
+  population?: number | null
+  area?: number | null
   flag?: string
+  languages?: string | null
+  currencies?: string | null
+  timezones?: string | null
+  borders?: string[] | null
 }
 
 type Store = {
