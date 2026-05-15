@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-type Country = {
+export type Country = {
   name: string
   nativeName?: string | null
   iso3: string
@@ -21,6 +21,10 @@ type Store = {
   setSelectedCountry: (c: Country | null) => void
   allCountries: Country[]
   setAllCountries: (c: Country[]) => void
+  isLoading: boolean
+  setIsLoading: (v: boolean) => void
+  error: string | null
+  setError: (v: string | null) => void
 }
 
 export const useCountryStore = create<Store>((set) => ({
@@ -28,4 +32,8 @@ export const useCountryStore = create<Store>((set) => ({
   setSelectedCountry: (c) => set({ selectedCountry: c }),
   allCountries: [],
   setAllCountries: (c) => set({ allCountries: c }),
+  isLoading: true,
+  setIsLoading: (v) => set({ isLoading: v }),
+  error: null,
+  setError: (v) => set({ error: v }),
 }))
