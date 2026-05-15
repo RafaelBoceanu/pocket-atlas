@@ -41,10 +41,15 @@ export default function MicrostatePanel() {
             alignItems: 'center',
             gap: '8px',
             fontFamily: 'system-ui, sans-serif',
+            transition: 'box-shadow 0.15s',
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 6px 16px rgba(0,0,0,0.12)')}
+          onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)')}
         >
-          <span style={{ fontSize: '16px' }}>🔍</span>
-          Microstates & Other Regions
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          Microstates
           <span style={{
             background: '#6366f1',
             color: 'white',
@@ -76,16 +81,18 @@ export default function MicrostatePanel() {
           display: 'flex',
           flexDirection: 'column',
         }}>
-          <div style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9' }}>
+          {/* Header */}
+          <div style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9', flexShrink: 0 }}>
             <h3 style={{ margin: 0, fontSize: '14px', fontWeight: '700', color: '#0f172a' }}>
-              Microstates & Other Regions
+              Microstates
             </h3>
             <p style={{ margin: '2px 0 0', fontSize: '12px', color: '#94a3b8' }}>
               Countries under 1,000 km²
             </p>
           </div>
 
-          <div style={{ overflowY: 'auto', flex: 1 }}>
+          {/* List */}
+          <div style={{ overflowY: 'auto', flex: 1, scrollbarWidth: 'thin', scrollbarColor: '#e2e8f0 transparent' }}>
             {microstates.map((country) => (
               <button
                 key={country.iso3}
@@ -104,6 +111,8 @@ export default function MicrostatePanel() {
                   background: 'white',
                   cursor: 'pointer',
                   textAlign: 'left',
+                  fontFamily: 'system-ui, sans-serif',
+                  transition: 'background 0.1s',
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.background = '#f8fafc')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
@@ -111,8 +120,15 @@ export default function MicrostatePanel() {
                 {country.flag && (
                   <img
                     src={country.flag}
-                    alt={country.name}
-                    style={{ width: '36px', height: '24px', objectFit: 'cover', borderRadius: '4px', border: '1px solid #e2e8f0', flexShrink: 0 }}
+                    alt={`Flag of ${country.name}`}
+                    style={{
+                      width: '36px',
+                      height: '24px',
+                      objectFit: 'cover',
+                      borderRadius: '4px',
+                      border: '1px solid #e2e8f0',
+                      flexShrink: 0,
+                    }}
                   />
                 )}
                 <div>
@@ -120,7 +136,8 @@ export default function MicrostatePanel() {
                     {country.name}
                   </div>
                   <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '1px' }}>
-                    {country.area != null ? `${country.area.toLocaleString()} km²` : ''}{country.capital ? ` · ${country.capital}` : ''}
+                    {country.area != null ? `${country.area.toLocaleString()} km²` : ''}
+                    {country.capital ? ` · ${country.capital}` : ''}
                   </div>
                 </div>
               </button>

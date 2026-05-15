@@ -17,6 +17,6 @@ const MapInner = dynamic(() => import('./MapInner'), {
 })
 
 export default function LeafletMap(props: LeafletMapProps) {
-  if (!props.geoData || props.countries.length === 0) return null
-  return <MapInner {...props} />
+  if (!props.geoData || !props.countries|| props.countries.length === 0) return null
+  return <MapInner {...props} geoData={props.geoData as GeoJsonObject}/>
 }
